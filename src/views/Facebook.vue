@@ -194,6 +194,9 @@ function changePage(e: any) {
                         :rows="selectedSort?.value"
                         :totalRecords="facebookData?.total"
                         @page="changePage"
+                        :pt="{
+                            root: { class: 'paginator__root' },
+                        }"
                     ></Paginator>
                 </div>
             </div>
