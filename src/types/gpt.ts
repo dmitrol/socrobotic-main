@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     chat_gpt_api_key: string
     chat_gpt_random_farm: boolean
     chat_gpt_script_farm_by_days: boolean

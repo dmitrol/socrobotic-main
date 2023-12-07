@@ -8,8 +8,9 @@ interface Hints {
 }
 
 export interface Fields {
+    [index: string]: any
     posting: boolean
-    frends_for_posting_start:  number | string
+    frends_for_posting_start:  number
     text_to_posting: string
     rss_links: string
     rss_with_comments: string

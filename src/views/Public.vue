@@ -5,7 +5,7 @@ import InputSwitch from 'primevue/inputswitch'
 import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
-import { Fields } from '@/types/public'
+import type { Fields } from '@/types/public'
 
 onBeforeMount(async () => {
     try {

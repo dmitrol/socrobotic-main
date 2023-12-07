@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/components/layout/AppLayout.vue'
 import InputText from '@/components/ui/InputText.vue'
-import { Fields } from '@/types/autofill'
+import type { Fields } from '@/types/autofill'
 import axios from 'axios'
 import InputSwitch from 'primevue/inputswitch'
 import Slider from 'primevue/slider'

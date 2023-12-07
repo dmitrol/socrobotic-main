@@ -6,7 +6,7 @@ import Slider from 'primevue/slider'
 import axios from 'axios'
 import { ref, reactive, onBeforeMount, watch } from 'vue'
 import { startWatch, setFields } from '@/helpers'
-import { Fields } from '../types/checkpoint'
+import type { Fields } from '../types/checkpoint'
 
 onBeforeMount(async () => {
     try {

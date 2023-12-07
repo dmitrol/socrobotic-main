@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     account_pause_after_registr: number
     add_friends_count: number[]
     add_friends_status: boolean

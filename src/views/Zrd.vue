@@ -6,7 +6,7 @@ import Slider from 'primevue/slider'
 import axios from 'axios'
 import { onBeforeMount, reactive } from 'vue'
 import { startWatch, setFields } from '@/helpers'
-import { Fields } from '@/types/zrd'
+import type { Fields } from '@/types/zrd'
 
 onBeforeMount(async () => {
     try {

@@ -1,8 +1,13 @@
 import { watch } from 'vue'
 import axios from 'axios'
 
-export function startWatch(fields: object, code: string) {
-    for (let index in fields) {
+interface NumbersNames {
+    [key: string]: string
+}
+
+export function startWatch(fields: { [key: string]: string }, code: string) {
+    let index: string
+    for (index in fields) {
         const fieldItem = index.toString()
         watch(
             () => fields[fieldItem],
@@ -18,7 +23,7 @@ export function startWatch(fields: object, code: string) {
     }
 }
 
-export function setFields(fields: object, obj: object) {
+export function setFields(fields: { [key: string]: any }, obj: { [key: string]: any }) {
     for (let key in obj) {
         fields[key] = obj[key]
     }

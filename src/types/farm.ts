@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     accept_friends_count: number[]
     accept_friends_on_farm: boolean
     action_interval: any[]

@@ -8,6 +8,7 @@ interface Hints {
 }
 
 export interface Fields {
+  [index: string]: any
   creative_folder_path: string;
   cards_list: string;
   company_for_import: string;

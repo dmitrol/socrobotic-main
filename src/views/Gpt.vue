@@ -6,7 +6,7 @@ import Textarea from '@/components/ui/Textarea.vue'
 import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
-import { Fields } from '@/types/gpt'
+import type { Fields } from '@/types/gpt'
 
 onBeforeMount(async () => {
     try {

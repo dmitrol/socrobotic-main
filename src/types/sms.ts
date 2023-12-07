@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     activation_pw: string
     dropsmsbot: string
     five_sim_sms: string

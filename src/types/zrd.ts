@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     ads_get_token_status: boolean
     ads_get_token_day_start: number
     ads_get_phone: boolean

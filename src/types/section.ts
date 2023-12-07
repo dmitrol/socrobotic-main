@@ -1,4 +1,5 @@
 export interface SectionData {
+    [index: string]: any
     current_page: number
     data: any[]
     per_page: number
@@ -10,6 +11,7 @@ export interface SectionData {
 }
 
 export interface LinkItem {
+    [index: string]: any
     code: string
     help: string
     help_status: number

@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     remove_invalid_accounts: boolean
     server_auto_reboot: boolean
     servert_auto_reboot_at: number

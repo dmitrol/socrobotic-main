@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     messenger: boolean
     message_max: number
     message_total: number

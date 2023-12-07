@@ -8,7 +8,7 @@ import Slider from 'primevue/slider'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import axios from 'axios'
-import { Fields } from '@/types/messenger'
+import type { Fields } from '@/types/messenger'
 
 onBeforeMount(async () => {
     try {

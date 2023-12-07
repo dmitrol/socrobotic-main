@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     logs_to_db_status: boolean,
     logs_to_telegram_chat_id: string,
     logs_to_telegram_status: boolean,

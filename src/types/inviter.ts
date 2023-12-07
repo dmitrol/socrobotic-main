@@ -1,4 +1,5 @@
 export interface Fields {
+    [index: string]: any
     inviter: string,
     day_to_start_inviter: number,
     check_white_list_names: string,

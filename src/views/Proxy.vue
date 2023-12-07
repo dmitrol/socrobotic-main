@@ -3,6 +3,7 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
+import type { Fields } from '@/types/proxy'
 
 onBeforeMount(async () => {
     try {
@@ -16,7 +17,7 @@ onBeforeMount(async () => {
     startWatch(fields, 'proxy')
 })
 
-const fields = reactive({
+const fields: Fields = reactive({
     proxy_accounts_count: 1,
     proxy_max_threads: 25,
 })

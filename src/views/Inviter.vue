@@ -6,7 +6,7 @@ import Slider from 'primevue/slider'
 import { reactive, onBeforeMount, watch } from 'vue'
 import axios from 'axios'
 import { startWatch, setFields } from '@/helpers'
-import { Fields } from '@/types/inviter'
+import type { Fields } from '@/types/inviter'
 
 const fields: Fields = reactive({
     inviter: '',
