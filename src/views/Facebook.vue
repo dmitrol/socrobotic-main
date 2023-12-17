@@ -9,7 +9,9 @@ import { useDark, useWindowSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import Dropdown from 'primevue/dropdown'
 import Paginator from 'primevue/paginator'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const facebookStore = useFacebookStore()
 const { facebookData, selectedRegister, sortRegister, selectedSort, sortSort, page } = storeToRefs(facebookStore)
@@ -27,12 +29,19 @@ function changePage(e: any) {
     page.value = e?.page + 1
     facebookStore.getFacebookData()
 }
+
+watch(
+    () => facebookStore.sortOrder,
+    async () => {
+        await facebookStore.getFacebookDataBySort()
+    },
+)
 </script>
 
 <template>
     <AppLayout>
         <div class="facebook">
-            <h2 class="facebook__title title">Аккаунты (38 573)</h2>
+            <h2 class="facebook__title title">{{ t('accounts') }} ({{ facebookStore.facebookData?.total }})</h2>
             <div class="facebook__nav" v-if="width > 429">
                 <div class="facebook__nav-left">
                     <div class="facebook__nav-register">
@@ -51,37 +60,41 @@ function changePage(e: any) {
                                     item: { class: 'reg__item' },
                                     input: { class: 'reg__input' },
                                 }"
-                                @change="facebookStore.getFacebookData"
+                                @change="facebookStore.getFacebookDataBySort"
                             />
                             <span class="facebook__nav-span">Сортировать по:</span>
                         </div>
                         <ButtonIcon
                             border="1px solid #BFC5CD"
-                            backgroundColor="transparent"
+                            :backgroundColor="facebookStore.sortOrder === 'asc' ? '#0067D5' : 'transparent'"
                             src="/icons/arrow-up.svg"
                             alt="Вверх"
                             v-if="!isDark"
+                            @click="facebookStore.sortOrder = 'asc'"
                         />
                         <ButtonIcon
                             border="1px solid #3C5A7B"
-                            backgroundColor="transparent"
+                            :backgroundColor="facebookStore.sortOrder === 'asc' ? '#0067D5' : 'transparent'"
                             src="/icons/arrow-up-dark.svg"
                             alt="Вверх"
                             v-else
+                            @click="facebookStore.sortOrder = 'asc'"
                         />
                         <ButtonIcon
                             border="1px solid #BFC5CD"
-                            backgroundColor="transparent"
+                            :backgroundColor="facebookStore.sortOrder === 'desc' ? '#0067D5' : 'transparent'"
                             src="/icons/arrow-down-sort.svg"
                             alt="Вниз"
                             v-if="!isDark"
+                            @click="facebookStore.sortOrder = 'desc'"
                         />
                         <ButtonIcon
                             border="1px solid #3C5A7B"
-                            backgroundColor="transparent"
+                            :backgroundColor="facebookStore.sortOrder === 'desc' ? '#0067D5' : 'transparent'"
                             src="/icons/arrow-down-sort-dark.svg"
                             alt="Вниз"
                             v-else
+                            @click="facebookStore.sortOrder = 'desc'"
                         />
                     </div>
                     <div class="facebook__nav-register_sort">
@@ -104,8 +117,20 @@ function changePage(e: any) {
                     </div>
                 </div>
                 <div class="facebook__nav-right">
-                    <ButtonIcon src="/icons/play.svg" alt="Начать" border="none" backgroundColor="#0067D5" />
-                    <ButtonIcon src="/icons/stop.svg" alt="Остановить" border="none" backgroundColor="#0067D5" />
+                    <ButtonIcon
+                        src="/icons/play.svg"
+                        alt="Начать"
+                        border="none"
+                        backgroundColor="#0067D5"
+                        @click="facebookStore.setActivityAll(1)"
+                    />
+                    <ButtonIcon
+                        src="/icons/stop.svg"
+                        alt="Остановить"
+                        border="none"
+                        backgroundColor="#0067D5"
+                        @click="facebookStore.setActivityAll(0)"
+                    />
                     <ButtonIcon src="/icons/download.svg" alt="Скачать" border="none" backgroundColor="#0067D5" />
                     <ButtonIcon src="/icons/upload.svg" alt="Загрузить" border="none" backgroundColor="#0067D5" />
                 </div>

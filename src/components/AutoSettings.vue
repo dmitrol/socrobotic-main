@@ -2,6 +2,8 @@
 import InputSwitch from 'primevue/inputswitch'
 import Slider from 'primevue/slider'
 import { useAutoserverStore } from '@/stores/autoserver'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const autoserverStore = useAutoserverStore()
 </script>
@@ -9,23 +11,23 @@ const autoserverStore = useAutoserverStore()
 <template>
     <div class="auto">
         <div class="auto__inner">
-            <h3 class="auto__subtitle">Общие настройки</h3>
+            <h3 class="auto__subtitle">{{ t('general_server_options') }}</h3>
             <div class="auto__wrapper">
                 <div class="auto__item auto__item_reverse">
                     <InputSwitch v-model="autoserverStore.fields.remove_invalid_accounts" />
-                    <span class="auto__text">Удалять невалидные аккаунты</span>
+                    <span class="auto__text">{{ t('remove_invalid_accounts') }}</span>
                 </div>
                 <div class="auto__item auto__item_reverse">
                     <InputSwitch v-model="autoserverStore.fields.template_auto_update" />
-                    <span class="auto__text">Автоматически обновлять шаблоны</span>
+                    <span class="auto__text">{{ t('template_auto_update') }}</span>
                 </div>
                 <div class="auto__item auto__item_reverse">
                     <InputSwitch v-model="autoserverStore.fields.server_auto_reboot" />
-                    <span class="auto__text">Автоматически перезагружать сервер</span>
+                    <span class="auto__text">{{ t('server_auto_reboot') }}</span>
                 </div>
 
                 <div class="posting__item" v-if="autoserverStore.fields.server_auto_reboot === true">
-                    <span class="posting__text">День старта</span>
+                    <span class="posting__text">{{ t('servert_auto_reboot_at') }}</span>
                     <Slider v-model="autoserverStore.fields.servert_auto_reboot_at" :min="1" :max="24" />
                 </div>
             </div>

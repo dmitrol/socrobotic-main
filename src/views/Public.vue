@@ -6,6 +6,9 @@ import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '@/types/public'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
+
 
 onBeforeMount(async () => {
     try {
@@ -33,22 +36,22 @@ const fields: Fields = reactive({
 <template>
     <AppLayout>
         <div class="public">
-            <h2 class="inviter__title title">Настройка инвайтера</h2>
+            <h2 class="inviter__title title">{{ t('inviter_setting') }}</h2>
             <div class="public__inner">
                 <div class="public__item public__item_reverse">
                     <InputSwitch v-model="fields.inviter_public" />
-                    <span class="public__text">Инвайтер в паблик</span>
+                    <span class="public__text">{{ t('public_inviter') }}</span>
                 </div>
                 <div class="public__item">
-                    <span class="public__text">Ссылка на паблик</span>
+                    <span class="public__text">{{ t('public_link') }}</span>
                     <Textarea v-model:input="fields.inviter_public_link" />
                 </div>
                 <div class="public__item">
-                    <span class="public__text">Текст приглашения в паблик</span>
+                    <span class="public__text">{{ t('public_inviter_text') }}</span>
                     <Textarea v-model:input="fields.inviter_public_invite_text" />
                 </div>
                 <div class="public__item">
-                    <span class="public__text">Ссылки на группы и приглашения</span>
+                    <span class="public__text">{{ t('group_links') }}</span>
                     <Textarea v-model:input="fields.inviter_repost_links" />
                 </div>
             </div>

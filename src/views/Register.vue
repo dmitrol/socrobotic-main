@@ -14,6 +14,8 @@ import { ref, watch } from 'vue'
 
 import { useRegisterStore } from '@/stores/register'
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const registerStore = useRegisterStore()
 
@@ -48,35 +50,35 @@ watch(selectedWay, () => {
 <template>
     <AppLayout>
         <div class="register">
-            <h2 class="register__title title">Регистрация</h2>
+            <h2 class="register__title title">{{ t('registration') }}</h2>
             <div class="register__wrapper">
                 <div class="register__inner">
                     <div class="register__item">
-                        <span class="register__text">Отлежка</span>
+                        <span class="register__text">{{ t('wait') }}</span>
                         <Slider v-model="registerStore.fields.account_pause_after_registr" :min="1" :max="48" />
                     </div>
                     <div class="register__item">
-                        <span class="register__text">Потоки</span>
+                        <span class="register__text">{{ t('streams') }}</span>
                         <Slider v-model="registerStore.fields.reg_threads_count" :min="1" :max="99" />
                     </div>
                     <div class="register__item">
                         <InputText
                             v-model:input="registerStore.fields.reg_accounts_per_day"
                             type="number"
-                            placeholder="Количество аккаунтов"
+                            :placeholder="t('reg_accounts_per_day')"
                         />
                     </div>
                     <div class="register__item" v-if="registerStore.fields.reg_around_the_clock === true">
-                        <span class="register__text">Время регистрации</span>
+                        <span class="register__text">{{ t('reg_time') }}</span>
                         <Slider v-model="registerStore.fields.reg_time_range" :min="0" :max="24" :range="true" />
                     </div>
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.reg_around_the_clock" />
-                        <span class="register__item">Регистрировать круглосуточно</span>
+                        <span class="register__item">{{ t('reg_around_clock') }}</span>
                     </div>
                     <div class="register__item">
                         <div class="register__dropdown">
-                            <span class="register__text-span">Способ регистрации:</span>
+                            <span class="register__text-span">{{ t('reg_method') }}</span>
                             <Dropdown
                                 v-model="selectedWay"
                                 icon="none"
@@ -96,21 +98,19 @@ watch(selectedWay, () => {
                     </div>
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.relink_to_service_phone" />
-                        <span class="register__item">Перепривязывать на номер с сервиса</span>
+                        <span class="register__item">{{ t('rebind_service_number') }}</span>
                     </div>
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.relink_to_email" />
-                        <span class="register__item">Перепривязывать на почту</span>
+                        <span class="register__item">{{ t('rebind_to_mail') }}</span>
                     </div>
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.get_phone_on_reg_ban" />
-                        <span class="register__item"
-                            >Получать номер телефона при бане аккаунта в момент регистрации</span
-                        >
+                        <span class="register__item">{{ t('receive_phone_banned_reg') }}</span>
                     </div>
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.register_to_my_emails" />
-                        <span class="register__item">Регистрировать на свои почты</span>
+                        <span class="register__item">{{ t('register_to_my_emails') }}</span>
                     </div>
                 </div>
                 <RegisterMail />

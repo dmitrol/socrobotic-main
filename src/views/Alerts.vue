@@ -6,6 +6,8 @@ import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '@/types/alerts'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 onBeforeMount(async () => {
     try {
@@ -55,54 +57,54 @@ const fields: Fields = reactive({
             <div class="alerts__inner">
                 <div class="alerts__item alerts__item_reverse">
                     <InputSwitch v-model="fields.logs_to_db_status" />
-                    <span class="alerts__text">Писать логи в БД</span>
+                    <span class="alerts__text">{{ t('logs_to_db') }}</span>
                 </div>
                 <div class="alerts__item alerts__item_reverse">
                     <InputSwitch v-model="fields.logs_to_telegram_status" />
-                    <span class="alerts__text">Отправлять все логи в телегу</span>
+                    <span class="alerts__text">{{ t('logs_to_telegram') }}</span>
                 </div>
                 <div class="alerts__item" v-if="fields.logs_to_telegram_status === true">
-                    <span class="alerts__text">Токен</span>
+                    <span class="alerts__text">{{ t('token') }}</span>
                     <InputText v-model:input="fields.logs_to_telegram_token" type="text" />
                 </div>
                 <div class="alerts__item" v-if="fields.logs_to_telegram_status === true">
-                    <span class="alerts__text">Чат id</span>
+                    <span class="alerts__text">{{ t('chat_id') }}</span>
                     <InputText v-model:input="fields.logs_to_telegram_chat_id" type="text" />
                 </div>
                 <div class="alerts__item alerts__item_reverse">
                     <InputSwitch v-model="fields.telegram_reger_status" />
-                    <span class="alerts__text">Оповещения по регеру</span>
+                    <span class="alerts__text">{{ t('notifications_for_reg') }}</span>
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_reger_status === true">
-                    <span class="alerts__text">Токен</span>
+                    <span class="alerts__text">{{ t('token') }}</span>
                     <InputText v-model:input="fields.tg_reger_api_token" type="text" />
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_reger_status === true">
-                    <span class="alerts__text">Чат id</span>
+                    <span class="alerts__text">{{ t('chat_id') }}</span>
                     <InputText v-model:input="fields.tg_reger_chat_id" type="text" />
                 </div>
                 <div class="alerts__item alerts__item_reverse">
                     <InputSwitch v-model="fields.telegram_worm_status" />
-                    <span class="alerts__text">Оповещения по worm</span>
+                    <span class="alerts__text">{{ t('notifications_for_warm') }}</span>
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_worm_status === true">
-                    <span class="alerts__text">Токен</span>
+                    <span class="alerts__text">{{ t('token') }}</span>
                     <InputText v-model:input="fields.tg_worm_api_token" type="text" />
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_worm_status === true">
-                    <span class="alerts__text">Чат id</span>
+                    <span class="alerts__text">{{ t('chat_id') }}</span>
                     <InputText v-model:input="fields.tg_worm_chat_id" type="text" />
                 </div>
                 <div class="alerts__item alerts__item_reverse">
                     <InputSwitch v-model="fields.telegram_chat_bot_status" />
-                    <span class="alerts__text">Оповещения для чат бота</span>
+                    <span class="alerts__text">{{ t('notifications_for_chat_bot') }}</span>
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_chat_bot_status === true">
-                    <span class="alerts__text">Токен</span>
+                    <span class="alerts__text">{{ t('token') }}</span>
                     <InputText v-model:input="fields.tg_chat_bot_api_token" type="text" />
                 </div>
                 <div class="alerts__item" v-if="fields.telegram_chat_bot_status === true">
-                    <span class="alerts__text">Чат id</span>
+                    <span class="alerts__text">Ч{{ t('chat_id') }}</span>
                     <InputText v-model:input="fields.tg_chat_bot_chat_id" type="text" />
                 </div>
             </div>

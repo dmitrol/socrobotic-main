@@ -3,6 +3,8 @@ import Textarea from '@/components/ui/Textarea.vue'
 import InputSwitch from 'primevue/inputswitch'
 import Slider from 'primevue/slider'
 import { usePostingStore } from '@/stores/posting'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const postingStore = usePostingStore()
 </script>
@@ -11,47 +13,47 @@ const postingStore = usePostingStore()
     <div class="posting__inner">
         <div class="posting__item posting__item_reverse">
             <InputSwitch v-model="postingStore.fields.posting" />
-            <span class="posting__text">Постинг</span>
+            <span class="posting__text">{{ t('posting') }}</span>
         </div>
         <div class="posting__item" v-if="postingStore.fields.posting === true">
-            <span class="posting__text">Количество друзей для старта</span>
+            <span class="posting__text">{{ t('friends_number_to_start') }}</span>
             <Slider v-model="postingStore.fields.frends_for_posting_start" :min="100" :max="1000" />
         </div>
         <div class="posting__item" v-if="postingStore.fields.posting === true">
-            <span class="posting__text">Текст для постов на стену</span>
+            <span class="posting__text">{{ t('wall_posts_text') }}</span>
             <Textarea v-model:input="postingStore.fields.text_to_posting" />
         </div>
         <div class="posting__item posting__item_reverse">
             <InputSwitch v-model="postingStore.fields.post_link_and_text_to_profile" />
-            <span class="posting__text">Постить ссылку и текст в профиль</span>
+            <span class="posting__text">{{ t('post_link_text') }}</span>
         </div>
         <div class="posting__item" v-if="postingStore.fields.post_link_and_text_to_profile === true">
-            <span class="posting__text">Текст для биографии</span>
+            <span class="posting__text">{{ t('biography_text') }}</span>
             <Textarea v-model:input="postingStore.fields.text_to_bio" />
         </div>
         <div class="posting__item">
-            <span class="posting__text">День старта</span>
+            <span class="posting__text">{{ t('start_day') }}</span>
             <Slider v-model="postingStore.fields.reposting_day_start" :min="0" :max="30" />
         </div>
         <div class="posting__item">
-            <span class="posting__text">Ссылки на группы/паблики для репостов</span>
+            <span class="posting__text">{{ t('links_groups_publics') }}</span>
             <Textarea v-model:input="postingStore.fields.links_to_repost" />
         </div>
         <div class="posting__item">
-            <span class="posting__text">RSS для постов в группы</span>
+            <span class="posting__text">{{ t('rss_posts') }}</span>
             <Textarea v-model:input="postingStore.fields.rss_links" />
         </div>
         <div class="posting__item">
-            <span class="posting__text">RSS с комментариями для постов</span>
+            <span class="posting__text">{{ t('rss_with_comments') }}</span>
             <Textarea v-model:input="postingStore.fields.rss_with_comments" />
         </div>
         <div class="posting__item posting__item_reverse">
             <InputSwitch v-model="postingStore.fields.posting_like" />
-            <span class="posting__text">Лайкать посты</span>
+            <span class="posting__text">{{ t('like_posts') }}</span>
         </div>
         <div class="posting__item posting__item_reverse">
             <InputSwitch v-model="postingStore.fields.posting_share" />
-            <span class="posting__text">Расшарить посты</span>
+            <span class="posting__text">{{ t('share_posts') }}</span>
         </div>
     </div>
 </template>

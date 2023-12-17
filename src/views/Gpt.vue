@@ -8,6 +8,9 @@ import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '@/types/gpt'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
+
 onBeforeMount(async () => {
     try {
         const res = await axios.post('setting/get', { code: 'chat-gpt' })
@@ -50,11 +53,11 @@ const fields: Fields = reactive({
 
                 <div class="gpt__item" v-if="fields.chat_gpt_api_key !== '' && fields.chat_gpt_api_key !== null">
                     <InputSwitch v-model="fields.chat_gpt_random_farm" />
-                    <span class="gpt__text">Рандомный фарм</span>
+                    <span class="gpt__text">{{ t('chat_gpt_random_farm') }}</span>
                 </div>
                 <div class="gpt__item" v-if="fields.chat_gpt_api_key !== '' && fields.chat_gpt_api_key !== null">
                     <InputSwitch v-model="fields.chat_gpt_script_farm_by_days" />
-                    <span class="gpt__text">Фарм дням по сценариям</span>
+                    <span class="gpt__text">{{ t('chat_gpt_script_farm_day') }}</span>
                 </div>
 
                 <template
@@ -65,7 +68,7 @@ const fields: Fields = reactive({
                     "
                 >
                     <div class="gpt__item" v-for="index in 14" :key="index">
-                        <span class="gpt__text">День {{ index }}</span>
+                        <span class="gpt__text">{{ t('chat_gpt_script_farm_day') }} {{ index }}</span>
                         <Textarea v-model:input="fields['chat_gpt_script_farm_day_' + index]" type="text" />
                     </div>
                 </template>

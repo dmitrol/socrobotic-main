@@ -4,6 +4,8 @@ import StatusSuccess from '@/components/icons/StatusSuccess.vue'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import Dropdown from 'primevue/dropdown'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const selectedServer = ref<string>('')
 const server = ref([
@@ -15,7 +17,7 @@ const server = ref([
 	<AppLayout>
 		<div class="servers">
 			<div class="servers__item">
-				<h2 class="servers__title title">Сервера</h2>
+				<h2 class="servers__title title">{{ t('remote_servers_menu') }}</h2>
 				<div class="servers__dropdown">
 					<Dropdown v-model="selectedServer" icon="none" :options="server" optionLabel="name" placeholder="все" unstyled
 						:pt="{ root: { class: 'server__root' }, trigger: { class: 'server__trigger' }, panel: { class: 'server__panel' }, item: { class: 'server__item' }, input: { class: 'server__input' } }" />

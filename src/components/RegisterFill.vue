@@ -2,7 +2,8 @@
 import Textarea from '@/components/ui/Textarea.vue'
 import InputSwitch from 'primevue/inputswitch'
 import { useRegisterStore } from '@/stores/register'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 const registerStore = useRegisterStore()
 
 // const bridesBay = ref<boolean>(false)
@@ -15,26 +16,26 @@ const registerStore = useRegisterStore()
 <template>
 	<div class="register">
 		<div class="register__inner">
-			<h3 class="register__subtitle">Заполнение</h3>
+			<h3 class="register__subtitle">{{ t('filling') }}</h3>
 			<div class="register__wrapper">
 				<div class="register__item register__item_reverse">
 					<InputSwitch v-model="registerStore.fields.brides_bay_photo" />
-					<span class="register__text">Фото с BridesBay</span>
+					<span class="register__text">{{ t('photo_from') }}</span>
 				</div>
 				<div class="register__item register__item_reverse">
 					<InputSwitch v-model="registerStore.fields.fill_info" />
-					<span class="register__text">Заполнять информацию</span>
+					<span class="register__text">{{ t('filling_inf') }}</span>
 				</div>
 				<div class="register__item register__item_reverse" v-if="registerStore.fields.fill_info === true">
 					<InputSwitch v-model="registerStore.fields.fill_by_current_ip" />
-					<span class="register__text">Заполнять исходя из текущего ip адреса</span>
+					<span class="register__text">{{ t('fill_based_ip') }}</span>
 				</div>
 				<div class="register__item">
-					<span class="register__text">Образование</span>
+					<span class="register__text">{{ t('education') }}</span>
 					<Textarea v-model:input="registerStore.fields.text_to_education" />
 				</div>
 				<div class="register__item">
-					<span class="register__text">Работа</span>
+					<span class="register__text">{{ t('work') }}</span>
 					<Textarea v-model:input="registerStore.fields.text_to_work" />
 				</div>
 			</div>

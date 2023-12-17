@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Slider from 'primevue/slider'
 import { useRegisterStore } from '@/stores/register'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const registerStore = useRegisterStore()
 
@@ -10,9 +12,9 @@ const registerStore = useRegisterStore()
 <template>
 	<div class="register">
 		<div class="register__inner">
-			<h3 class="register__subtitle">Посты</h3>
+			<h3 class="register__subtitle">{{ t('posts') }}</h3>
 			<div class="register__item">
-				<span class="register__text">Количество постов на стене при регистрации</span>
+				<span class="register__text">{{ t('posts_num_at_reg') }}</span>
 				<Slider v-model="registerStore.fields.post_count" :min="1" :max="10" :range="true" />
 			</div>
 		</div>

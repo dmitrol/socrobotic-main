@@ -9,6 +9,8 @@ import axios from 'axios'
 import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '@/types/sms'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 onBeforeMount(async () => {
     try {
@@ -231,27 +233,27 @@ watch(selectedCountry, async () => {
 <template>
     <AppLayout>
         <div class="sms">
-            <h2 class="sms__title title">SMS Сервисы</h2>
+            <h2 class="sms__title title">{{ t('sms_services') }}</h2>
             <div class="sms__inner">
                 <div class="sms__item sms__item_reverse">
                     <InputSwitch v-model="fields.take_phone_by_ip" />
-                    <span class="sms__text">Брать телефон исходя из ip адреса</span>
+                    <span class="sms__text">{{ t('phone_based_on_ip') }}</span>
                 </div>
                 <div class="sms__item">
-                    <span class="sms__text">Время ожидания смс</span>
+                    <span class="sms__text">{{ t('sms_waiting_time') }}</span>
                     <Slider v-model="fields.how_long_wait_sms" :min="1" :max="20" />
                 </div>
                 <div class="sms__item sms__item_reverse">
                     <InputSwitch v-model="fields.use_phone_multiple_times_for_reg" />
-                    <span class="sms__text">Использовать один номер несколько раз для регистрации</span>
+                    <span class="sms__text">{{ t('number_several_times_reg') }}</span>
                 </div>
                 <div class="sms__item sms__item_reverse">
                     <InputSwitch v-model="fields.use_phone_multiple_times_for_unlock" />
-                    <span class="sms__text">Использовать один номер несколько раз для разблокировки</span>
+                    <span class="sms__text">{{ t('number_several_times_unlock') }}</span>
                 </div>
                 <div class="sms__item sms__item_reverse">
                     <InputSwitch v-model="fields.generate_phone" />
-                    <span class="sms__text">Генерировать телефон</span>
+                    <span class="sms__text">{{ t('generate_phone') }}</span>
                 </div>
                 <InputText
                     v-model:input="fields.smska_net"

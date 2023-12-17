@@ -6,13 +6,15 @@ import Accordion from 'primevue/accordion'
 import AccordionTab from 'primevue/accordiontab'
 import Checkbox from 'primevue/checkbox'
 import ArrowDown from './icons/ArrowDown.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const facebookStore = useFacebookStore()
 const { filterBy } = storeToRefs(facebookStore)
 </script>
 
 <template>
-	<Accordion :activeIndex="0">
+	<Accordion :activeIndex="1">
 		<AccordionTab :pt="{ headerAction: { class: 'accordion__headeraction' }, content: { class: 'accordion__content' }, }">
 			<template #header>
 				<div class="facebook__item">
@@ -39,19 +41,19 @@ const { filterBy } = storeToRefs(facebookStore)
 					<Checkbox v-model="filterBy.avatar" :binary="true" @change="facebookStore.getFacebookData" :pt="{
 						root: { class: 'checkbox__root' }
 					}" />
-					<label class="facebook__inner-text" for="avatar">Аватарка</label>
+					<label class="facebook__inner-text" for="avatar">{{ t('avatarka') }}</label>
 				</div>
 				<div class="facebook__inner-info">
 					<Checkbox v-model="filterBy.mail" :binary="true" @change="facebookStore.getFacebookData" :pt="{
 						root: { class: 'checkbox__root' }
 					}" />
-					<label class="facebook__inner-text" for="filter">Почта</label>
+					<label class="facebook__inner-text" for="filter">{{ t('pochta') }}</label>
 				</div>
 				<div class="facebook__inner-info">
 					<Checkbox v-model="filterBy.no_mail" :binary="true" @change="facebookStore.getFacebookData" :pt="{
 						root: { class: 'checkbox__root' }
 					}" />
-					<label class="facebook__inner-text" for="withoutMail">Без почты</label>
+					<label class="facebook__inner-text" for="withoutMail">{{ t('no_pochta') }}</label>
 				</div>
 				<div class="facebook__inner-info">
 					<Checkbox v-model="filterBy.cookies" :binary="true" @change="facebookStore.getFacebookData" :pt="{
@@ -66,7 +68,7 @@ const { filterBy } = storeToRefs(facebookStore)
 						<Checkbox v-model="filterBy.launched" :binary="true" @change="facebookStore.getFacebookData" :pt="{
 							root: { class: 'checkbox__root' }
 						}" />
-						<label class="facebook__inner-text facebook__inner-text_much" for="numS">Количество запусков</label>
+						<label class="facebook__inner-text facebook__inner-text_much" for="numS">{{ t('launched') }}</label>
 					</div>
 					<InputText v-model:input="filterBy.launched_count" @change="facebookStore.getFacebookData" type="number"
 						class="facebook__inner-input facebook__inner-input_start" />
@@ -76,7 +78,7 @@ const { filterBy } = storeToRefs(facebookStore)
 						<Checkbox v-model="filterBy.search_by_login" :binary="true" @change="facebookStore.getFacebookData" :pt="{
 							root: { class: 'checkbox__root' }
 						}" />
-						<label class="facebook__inner-text facebook__inner-text_add" for="searchL">Поиск по логину</label>
+						<label class="facebook__inner-text facebook__inner-text_add" for="searchL">{{ t('search_by_login') }}</label>
 					</div>
 					<InputText v-model:input="filterBy.search_by_login_query" @change="facebookStore.getFacebookData" type="text"
 						class="facebook__inner-input facebook__inner-input_search" />

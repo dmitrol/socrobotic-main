@@ -9,6 +9,8 @@ import { reactive, onBeforeMount } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import axios from 'axios'
 import type { Fields } from '@/types/messenger'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 onBeforeMount(async () => {
     try {
@@ -45,35 +47,35 @@ const fields: Fields = reactive({
 <template>
     <AppLayout>
         <div class="messenger">
-            <h2 class="messenger__title title">Настройка мессенджера</h2>
+            <h2 class="messenger__title title">{{ t('messenger_setting') }}</h2>
             <div class="messenger__inner">
                 <div class="messenger__item messenger__item_reverse">
                     <InputSwitch v-model="fields.messenger" />
-                    <span class="messenger__text">Включить мессенджер</span>
+                    <span class="messenger__text">{{ t('messenger_enable') }}</span>
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Максимально количество сообщений на человека</span>
+                    <span class="messenger__text">{{ t('max_messages_per_person') }}</span>
                     <Slider v-model="fields.message_max" :min="1" :max="7" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сколько всего писать сообщений</span>
+                    <span class="messenger__text">{{ t('number_of_messages') }}</span>
                     <Slider v-model="fields.message_total" :min="0" :max="99" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Интервал</span>
+                    <span class="messenger__text">{{ t('interval') }}</span>
                     <Slider v-model="fields.message_interval" :min="1" :max="60" :range="true" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Интервал проверки новых сообщений</span>
+                    <span class="messenger__text">{{ t('interval_check_messages') }}</span>
                     <Slider v-model="fields.message_check_new" :min="1" :max="10" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сколько раз проверять непрочитанные</span>
+                    <span class="messenger__text">{{ t('number_of_check') }}</span>
                     <Slider v-model="fields.message_check_unread" :min="1" :max="10" />
                 </div>
                 <div class="messenger__item messenger__item_reverse" v-if="fields.messenger === true">
                     <InputSwitch v-model="fields.write_messages_first" />
-                    <span class="messenger__text">Писать сообщения первым</span>
+                    <span class="messenger__text">{{ t('write_messages_first') }}</span>
                 </div>
                 <div class="messenger__item messenger__item_reverse" v-if="fields.messenger === true">
                     <InputSwitch v-model="fields.dialog_flow" />
@@ -84,11 +86,11 @@ const fields: Fields = reactive({
                     <InputText v-model:input="fields.dialog_flow_api_key" type="text" />
                 </div>
                 <div class="messenger__item" v-if="fields.dialog_flow === true">
-                    <span class="messenger__text">DialogFlow Название бота</span>
+                    <span class="messenger__text">{{ t('bot_name') }}</span>
                     <InputText v-model:input="fields.dialog_flow_bot_name" type="text" />
                 </div>
                 <div class="messenger__item" v-if="fields.dialog_flow === true">
-                    <span class="messenger__text">DialogFlow Язык общения бота</span>
+                    <span class="messenger__text">{{ t('bot_language') }}</span>
                     <div class="messenger__info">
                         <div class="messenger__radio">
                             <RadioButton
@@ -100,37 +102,42 @@ const fields: Fields = reactive({
                             <label class="messenger__text" for="russian">Русский</label>
                         </div>
                         <div class="messenger__radio">
-                            <RadioButton v-model="fields.dialog_flow_bot_lang" inputId="english" name="lang" value="eng" />
+                            <RadioButton
+                                v-model="fields.dialog_flow_bot_lang"
+                                inputId="english"
+                                name="lang"
+                                value="eng"
+                            />
                             <label class="messenger__text" for="english">Английский</label>
                         </div>
                     </div>
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #1</span>
+                    <span class="messenger__text">{{ t('message') }} #1</span>
                     <Textarea v-model:input="fields.message_tempate_1" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #2</span>
+                    <span class="messenger__text">{{ t('message') }} #2</span>
                     <Textarea v-model:input="fields.message_tempate_2" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #3</span>
+                    <span class="messenger__text">{{ t('message') }} #3</span>
                     <Textarea v-model:input="fields.message_tempate_3" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #4</span>
+                    <span class="messenger__text">{{ t('message') }} #4</span>
                     <Textarea v-model:input="fields.message_tempate_4" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #5</span>
+                    <span class="messenger__text">{{ t('message') }} #5</span>
                     <Textarea v-model:input="fields.message_tempate_5" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #6</span>
+                    <span class="messenger__text">{{ t('message') }} #6</span>
                     <Textarea v-model:input="fields.message_tempate_6" />
                 </div>
                 <div class="messenger__item" v-if="fields.messenger === true">
-                    <span class="messenger__text">Сообщение #7</span>
+                    <span class="messenger__text">{{ t('message') }} #7</span>
                     <Textarea v-model:input="fields.message_tempate_7" />
                 </div>
             </div>

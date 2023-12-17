@@ -4,6 +4,8 @@ import Textarea from '@/components/ui/Textarea.vue'
 import InputSwitch from 'primevue/inputswitch'
 import Slider from 'primevue/slider'
 import { usePostingStore } from '@/stores/posting'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const postingStore = usePostingStore()
 
@@ -20,40 +22,40 @@ const postingStore = usePostingStore()
 <template>
     <div class="posting">
         <div class="posting__inner">
-            <h3 class="posting__subtitle">Постинг/Комментирование постов в группах</h3>
+            <h3 class="posting__subtitle">{{ t('section') }}</h3>
             <div class="posting__wrapper">
                 <div class="posting__item posting__item_reverse">
                     <InputSwitch v-model="postingStore.fields.like_to_post" />
-                    <span class="posting__text">Ставить лайк посту</span>
+                    <span class="posting__text">{{ t('like_post') }}</span>
                 </div>
                 <div class="posting__item posting__item_reverse">
                     <InputSwitch v-model="postingStore.fields.comment_to_post_status" />
-                    <span class="posting__text">Писать комментарий под постом</span>
+                    <span class="posting__text">{{ t('comment_post') }}</span>
                 </div>
                 <div class="posting__item" v-if="postingStore.fields.comment_to_post_status === true">
-                    <span class="posting__text">Текст для комментариев</span>
+                    <span class="posting__text">{{ t('comment_text') }}</span>
                     <Textarea v-model:input="postingStore.fields.comment_to_post" />
                 </div>
                 <div class="posting__item posting__item_reverse">
                     <InputSwitch v-model="postingStore.fields.post_to_dating_group" />
-                    <span class="posting__text">Делать посты в группах для знакомств</span>
+                    <span class="posting__text">{{ t('dating_groups_post') }}</span>
                 </div>
                 <div class="posting__item" v-if="postingStore.fields.post_to_dating_group === true">
-                    <span class="posting__text">День старта</span>
+                    <span class="posting__text">{{ t('start_day') }}</span>
                     <Slider v-model="postingStore.fields.post_to_dating_group_day_start" :min="0" :max="30" />
                 </div>
                 <div class="posting__item">
-                    <span class="posting__text">Поле для ввода пачки групп </span>
+                    <span class="posting__text">{{ t('groups_of_group_field') }}</span>
                     <Textarea v-model:input="postingStore.fields.groups_of_group_field" />
                 </div>
                 <div class="posting__item">
-                    <span class="posting__text">Поле для ввода текста</span>
+                    <span class="posting__text">{{ t('text_input_field') }}</span>
                     <Textarea v-model:input="postingStore.fields.text_input_field" />
                 </div>
                 <InputText
                     v-model:input="postingStore.fields.pictures_folder_path"
                     type="text"
-                    placeholder="Путь к папке с картинками"
+                    :placeholder="t('pictures_folder_path')"
                 />
             </div>
         </div>

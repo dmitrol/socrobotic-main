@@ -9,6 +9,8 @@ import type { Fields } from '@/types/farm'
 import axios from 'axios'
 import { onBeforeMount, ref, reactive, watch } from 'vue'
 import { startWatch, setFields } from '@/helpers'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 onBeforeMount(async () => {
     try {
@@ -112,35 +114,35 @@ watch(selectedCaptcha, async () => {
 <template>
     <AppLayout>
         <div class="farm">
-            <h2 class="farm__title title">Настройка фарма</h2>
+            <h2 class="farm__title title">{{ t('farm_settings') }}</h2>
             <div>
                 <div class="farm__inner">
                     <div class="farm__item">
-                        <span class="farm__text">Удалять номер с телефона аккаунта</span>
+                        <span class="farm__text">{{ t('del_phone') }}</span>
                         <InputSwitch v-model="fields.remove_phone" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Выключить аккаунт</span>
+                        <span class="farm__text">{{ t('disable') }} {{ t('account') }}</span>
                         <InputSwitch v-model="fields.turn_off_profile" />
                     </div>
                     <div class="farm__item" v-if="fields.turn_off_profile === true">
-                        <span class="farm__text">На какой день выключать аккаунт</span>
+                        <span class="farm__text">{{ t('dis_acc') }}</span>
                         <Slider v-model="fields.turn_off_profile_after_days" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Менять прокси, если невалидный (Worm)</span>
+                        <span class="farm__text">{{ t('change_proxy_inv') }} (Worm)</span>
                         <InputSwitch v-model="fields.change_proxy_on_invalid" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Менять прокси, если невалидный (Checkpoint)</span>
+                        <span class="farm__text">{{ t('change_proxy_inv') }} (Checkpoint)</span>
                         <InputSwitch v-model="fields.change_proxy_on_invalid_checkpoint" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Одобрять друзей при фарме</span>
+                        <span class="farm__text">{{ t('appr_friends') }}</span>
                         <InputSwitch v-model="fields.accept_friends_on_farm" />
                     </div>
                     <div class="farm__item" v-if="fields.accept_friends_on_farm === true">
-                        <span class="farm__text">Сколько друзей одобрять</span>
+                        <span class="farm__text">{{ t('count_appr_friends') }}</span>
                         <Slider v-model="fields.accept_friends_count" :min="0" :max="100" :range="true" />
                     </div>
                 </div>
@@ -151,47 +153,47 @@ watch(selectedCaptcha, async () => {
                         <InputSwitch v-model="fields.worm_status" />
                     </div>
                     <div class="farm__item" v-if="fields.worm_status === true">
-                        <span class="farm__text">Потоки Warm</span>
+                        <span class="farm__text"> {{ t('streams') }} Warm</span>
                         <Slider v-model="fields.worm_threads_count" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Checkpoint</span>
+                        <span class="farm__text"> {{ t('checkpoint') }}</span>
                         <InputSwitch v-model="fields.checkpoint_status" />
                     </div>
                     <div class="farm__item" v-if="fields.checkpoint_status === true">
-                        <span class="farm__text">Потоки Checkpoint</span>
+                        <span class="farm__text">{{ t('streams') }} {{ t('checkpoint') }}</span>
                         <Slider v-model="fields.checkpoint_threads_count" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Chat Bot</span>
+                        <span class="farm__text"> {{ t('chat_bot') }}</span>
                         <InputSwitch v-model="fields.chat_bot" />
                     </div>
                     <div class="farm__item" v-if="fields.chat_bot === true">
-                        <span class="farm__text">Потоки</span>
+                        <span class="farm__text">{{ t('streams') }}</span>
                         <Slider v-model="fields.chat_bot_threads" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Chat Bot Web</span>
+                        <span class="farm__text"> {{ t('chat_bot_web') }}</span>
                         <InputSwitch v-model="fields.chat_bot_web" />
                     </div>
                     <div class="farm__item" v-if="fields.chat_bot_web === true">
-                        <span class="farm__text">Потоки</span>
+                        <span class="farm__text">{{ t('streams') }}</span>
                         <Slider v-model="fields.chat_bot_web_threads" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">FB Authorization</span>
+                        <span class="farm__text">{{ t('fb_authorization') }}</span>
                         <InputSwitch v-model="fields.fb_authorization" />
                     </div>
                     <div class="farm__item" v-if="fields.fb_authorization === true">
-                        <span class="farm__text">Потоки</span>
+                        <span class="farm__text">{{ t('streams') }}</span>
                         <Slider v-model="fields.fb_authorization_threads" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Friends aproove</span>
+                        <span class="farm__text"> {{ t('friends_aproove') }}</span>
                         <InputSwitch v-model="fields.friends_aproove" />
                     </div>
                     <div class="farm__item" v-if="fields.friends_aproove === true">
-                        <span class="farm__text">Потоки</span>
+                        <span class="farm__text">{{ t('streams') }}</span>
                         <Slider v-model="fields.friends_aproove_threads" :min="0" :max="100" />
                     </div>
                     <div class="farm__item">
@@ -199,7 +201,7 @@ watch(selectedCaptcha, async () => {
                         <InputSwitch v-model="fields.fb_friends_aproove_requests" />
                     </div>
                     <div class="farm__item" v-if="fields.fb_friends_aproove_requests === true">
-                        <span class="farm__text">FB Friends Aproove Requests потоки</span>
+                        <span class="farm__text">FB Friends Aproove Requests {{ t('threads') }}</span>
                         <Slider v-model="fields.fb_friends_aproove_requests_threads" :min="0" :max="100" />
                     </div>
 
@@ -217,26 +219,26 @@ watch(selectedCaptcha, async () => {
                         <InputSwitch v-model="fields.fb_worm_bm" />
                     </div>
                     <div class="farm__item" v-if="fields.fb_worm_bm === true">
-                        <span class="farm__text">FB Worm BM потоки</span>
+                        <span class="farm__text">FB Worm BM {{ t('threads') }}</span>
                         <Slider v-model="fields.fb_worm_bm_threads" :min="0" :max="100" />
                     </div>
                 </div>
 
                 <div class="farm__inner">
                     <div class="farm__item">
-                        <span class="farm__text">Интервал между действиями</span>
+                        <span class="farm__text">{{ t('interval_betw_act') }}</span>
                         <Slider v-model="fields.action_interval" :min="1" :max="48" :range="true" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Как часто запускать аккаунты checkpoint?</span>
+                        <span class="farm__text">{{ t('launch_accounts') }} checkpoint?</span>
                         <Slider v-model="fields.often_to_run" :min="1" :max="50" :range="true" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Как часто запускать аккаунты warm?</span>
+                        <span class="farm__text">{{ t('launch_accounts') }} warm?</span>
                         <Slider v-model="fields.often_to_run_worm" :min="1" :max="50" :range="true" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Эмулировать мышь</span>
+                        <span class="farm__text">{{ t('emulate_mouse') }}</span>
                         <InputSwitch v-model="fields.emulate_mouse" />
                     </div>
                 </div>
@@ -244,29 +246,29 @@ watch(selectedCaptcha, async () => {
                 <div class="farm__inner">
                     <h3 class="farm__subtitle">Fan Page</h3>
                     <div class="farm__item">
-                        <span class="farm__text">Создавать Fan Page</span>
+                        <span class="farm__text">{{ t('create') }} Fan Page</span>
                         <InputSwitch v-model="fields.fan_page" />
                     </div>
                     <div class="farm__item" v-if="fields.fan_page === true">
-                        <span class="farm__text">Названия Fan Pages</span>
+                        <span class="farm__text">{{ t('names') }} Fan Pages</span>
                         <Textarea v-model:input="fields.fan_page_names" />
                     </div>
                     <div class="farm__item" v-if="fields.fan_page === true">
-                        <span class="farm__text">На какой день создавать</span>
+                        <span class="farm__text">{{ t('create_date') }}</span>
                         <Slider v-model="fields.day_to_create_fan_page" :min="0" :max="20" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Наполнять FP постами с LifeHacker</span>
+                        <span class="farm__text">{{ t('fill_posts') }} LifeHacker</span>
                         <InputSwitch v-model="fields.fan_page_fill_from_lifehacker" />
                     </div>
                     <div class="farm__item" v-if="fields.fan_page_fill_from_lifehacker === true">
-                        <span class="farm__text">Сколько постов делать </span>
+                        <span class="farm__text"> {{ t('posts_count') }}</span>
                         <Slider v-model="fields.day_to_create_fan_page" :min="0" :max="30" />
                     </div>
 
                     <div class="farm__item">
                         <div class="farm__dropdown">
-                            <span class="farm__text-span">Чем разгадывать капчу:</span>
+                            <span class="farm__text-span">{{ t('how_solve_captcha') }}</span>
                             <Dropdown
                                 v-model="selectedCaptcha"
                                 icon="none"
@@ -291,87 +293,87 @@ watch(selectedCaptcha, async () => {
                         <InputText v-model:input="fields.capmonster_api_key" type="text" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Постить посты с разных сайтов (Google Trneds, Fishki, Pikabu)</span>
+                        <span class="farm__text">{{ t('sites_posts') + '(Google Trneds, Fishki, Pikabu)' }}</span>
                         <InputSwitch v-model="fields.post_from_sites" />
                     </div>
                 </div>
 
                 <div class="farm__inner">
-                    <h3 class="farm__subtitle">Нагул кук</h3>
+                    <h3 class="farm__subtitle">{{ t('walking_cookies') }}</h3>
                     <div class="farm__item">
-                        <span class="farm__text">Гулять по сайтам</span>
+                        <span class="farm__text">{{ t('browse_sites') }}</span>
                         <InputSwitch v-model="fields.visit_sites_status" />
                     </div>
                     <div class="farm__item" v-if="fields.visit_sites_status === true">
-                        <span class="farm__text">Сколько сайтов посещать, нагуливать</span>
+                        <span class="farm__text">{{ t('count_browse_sites') }}</span>
                         <Slider v-model="fields.visited_sites_count" :min="0" :max="48" :range="true" />
                     </div>
                 </div>
                 <div class="farm__inner">
-                    <h3 class="farm__subtitle">Дополнительно</h3>
+                    <h3 class="farm__subtitle">{{ t('additionally') }}</h3>
 
                     <div class="farm__item">
-                        <span class="farm__text">Делать перепривязку на десктопный ЮА</span>
+                        <span class="farm__text">{{ t('rebind_desktop_ua') }}</span>
                         <InputSwitch v-model="fields.relink_to_desktop_ua" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">На какой день делать перепривязку</span>
+                        <span class="farm__text">{{ t('rebinding_day') }}</span>
                         <Slider v-model="fields.relink_to_desktop_ua_day_start" :min="0" :max="48" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Аккаунты для добавления в друзья</span>
+                        <span class="farm__text">{{ t('accs_to_friend') }}</span>
                         <Textarea v-model:input="fields.links_to_invite" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Передруживать друзей</span>
+                        <span class="farm__text">{{ t('renew_friends') }}</span>
                         <InputSwitch v-model="fields.ads_refriend_friends" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">День старта добавления в друзья</span>
+                        <span class="farm__text">{{ t('friendship_day') }}</span>
                         <Slider v-model="fields.ads_invite_friends_day_start" :min="0" :max="30" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Количество друзей</span>
+                        <span class="farm__text">{{ t('friends_number') }}</span>
                         <Slider v-model="fields.ads_friends_count" :min="0" :max="2000" />
                     </div>
                     <div class="farm__item">
-                        <span class="farm__text">Сколько своих фейков добавлять за раз</span>
+                        <span class="farm__text">{{ t('fakes_number') }}</span>
                         <Slider v-model="fields.fakes_count" :min="0" :max="48" :range="true" />
                     </div>
                 </div>
 
                 <div class="farm__inner">
-                    <h3 class="farm__subtitle">Залогиниваться на сайтах</h3>
+                    <h3 class="farm__subtitle">{{ t('login_to_sites') }}</h3>
                     <div class="farm__item">
-                        <span class="farm__text">Залогиниваться на сайтах</span>
+                        <span class="farm__text">{{ t('login_to_sites') }}</span>
                         <InputSwitch v-model="fields.login_to_sites" />
                     </div>
                     <div class="farm__item" v-if="fields.login_to_sites === true">
-                        <span class="farm__text">Сайты для авторизации</span>
+                        <span class="farm__text">{{ t('authorization_sites') }}</span>
                         <Textarea v-model:input="fields.lts_sites" />
                     </div>
                     <div class="farm__item" v-if="fields.login_to_sites === true">
-                        <span class="farm__text">День старта</span>
+                        <span class="farm__text">{{ t('start_day') }}</span>
                         <Slider v-model="fields.lts_start_day" :min="0" :max="30" />
                     </div>
                     <div class="farm__item" v-if="fields.login_to_sites === true">
-                        <span class="farm__text">Количество логинов</span>
+                        <span class="farm__text">{{ t('logins_number') }}</span>
                         <Slider v-model="fields.lts_count" :min="0" :max="30" />
                     </div>
                 </div>
 
                 <div class="farm__inner">
-                    <h3 class="farm__subtitle">Спам-бот</h3>
+                    <h3 class="farm__subtitle">{{ t('spam_bot') }}</h3>
                     <div class="farm__item">
-                        <span class="farm__text">Включить спам-бота</span>
+                        <span class="farm__text">{{ t('enable_spam_bot') }}</span>
                         <InputSwitch v-model="fields.spam_bot_enable" />
                     </div>
                     <div class="farm__item" v-if="fields.spam_bot_enable === true">
-                        <span class="farm__text">Количество потоков</span>
+                        <span class="farm__text">{{ t('threads_number') }}</span>
                         <Slider v-model="fields.spam_bot_treads" :min="1" :max="300" />
                     </div>
                     <div class="farm__item" v-if="fields.spam_bot_enable === true">
-                        <span class="farm__text">Как часто запускать спам-бот</span>
+                        <span class="farm__text">{{ t('spam_bot_runs') }}</span>
                         <Slider v-model="fields.spam_bot_how_often_run" :min="1" :max="300" />
                     </div>
                 </div>

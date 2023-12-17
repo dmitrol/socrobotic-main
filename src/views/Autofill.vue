@@ -8,6 +8,9 @@ import Slider from 'primevue/slider'
 import { onBeforeMount, reactive } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
+
 onBeforeMount(async () => {
     try {
         const res = await axios.post('setting/get', { code: 'autoupload' })
@@ -36,36 +39,36 @@ const field: Fields = reactive({
 <template>
     <AppLayout>
         <div class="fill">
-            <h2 class="fill__title title">Автозалив</h2>
+            <h2 class="fill__title title">{{ t('autoupload') }}</h2>
             <div class="fill__inner">
                 <div class="fill__item fill__item_reverse">
                     <InputSwitch v-model="field.dolphin_transfer_accountes" />
-                    <span class="fill__text">Передавать аккаунты в Dolphin</span>
+                    <span class="fill__text">{{ t('dolphin_transfer_accountes') }}</span>
                 </div>
-                <InputText v-model:input="field.dolphin_token" type="text" placeholder="Токен Dolphin" />
+                <InputText v-model:input="field.dolphin_token" type="text" :placeholder="t('dolphin_token')" />
                 <div class="fill__item">
-                    <span class="fill__text">Сколько дней фарма</span>
+                    <span class="fill__text">{{ t('dolphin_farm_days_to_transfer') }}</span>
                     <Slider v-model="field.dolphin_farm_days_to_transfer" :min="0" :max="99" />
                 </div>
                 <div class="fill__item">
-                    <span class="fill__text">Сколько друзей должно быть</span>
+                    <span class="fill__text">{{ t('dolphin_have_friends_to_transfer') }}</span>
                     <Slider v-model="field.dolphin_have_friends_to_transfer" :min="0" :max="9999" />
                 </div>
                 <div class="fill__item fill__item_reverse">
                     <InputSwitch v-model="field.dolphin_fixer_enable" />
-                    <span class="fill__text">Брать аккаунты с Dolphin</span>
+                    <span class="fill__text">{{ t('dolphin_fixer_enable') }}</span>
                 </div>
                 <div class="fill__item">
-                    <span class="fill__text">Потоки</span>
+                    <span class="fill__text">{{ t('dolphin_threads') }}</span>
                     <Slider v-model="field.dolphin_threads" :min="0" :max="99" />
                 </div>
                 <div class="fill__item fill__item_reverse">
                     <InputSwitch v-model="field.dolphin_delete_from_farm_on_transfer" />
-                    <span class="fill__text">Удалять из фарма при переносе в Dolphin</span>
+                    <span class="fill__text">{{ t('dolphin_delete_from_farm_on_transfer') }}</span>
                 </div>
                 <div class="fill__item fill__item_reverse">
                     <InputSwitch v-model="field.dolphin_turnoff_farm_on_transfer" />
-                    <span class="fill__text">Выключать фарм при переносе в Dolphin</span>
+                    <span class="fill__text">{{ t('dolphin_turnoff_farm_on_transfer') }}</span>
                 </div>
             </div>
         </div>

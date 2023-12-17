@@ -4,6 +4,8 @@ import AutoZennoposter from '@/components/AutoZennoposter.vue'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import { useAutoserverStore } from '@/stores/autoserver'
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const autoserverStore = useAutoserverStore()
 

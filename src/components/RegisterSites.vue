@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Slider from 'primevue/slider'
 import { useRegisterStore } from '@/stores/register'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const registerStore = useRegisterStore()
 </script>
@@ -8,9 +10,9 @@ const registerStore = useRegisterStore()
 <template>
 	<div class="register">
 		<div class="register__inner">
-			<h3 class="register__subtitle">Сайты</h3>
+			<h3 class="register__subtitle">{{ t('sites') }}</h3>
 			<div class="register__item">
-				<span class="register__text">Сколько сайтов посещать перед заходом на форму регистрации</span>
+				<span class="register__text">{{ t('sites_before_reg') }}</span>
 				<Slider v-model="registerStore.fields.visit_sites" :min="0" :max="48" :range="true" />
 			</div>
 		</div>

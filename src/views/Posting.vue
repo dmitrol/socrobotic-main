@@ -5,6 +5,9 @@ import PostingOnGroups from '@/components/PostingOnGroups.vue'
 import { usePostingStore } from '@/stores/posting'
 import { onMounted } from 'vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
+
 const postingStore = usePostingStore()
 
 onMounted(async () => {
@@ -16,7 +19,7 @@ onMounted(async () => {
 <template>
     <AppLayout>
         <div class="posting">
-            <h2 class="posting__title title">Настройка постинга</h2>
+            <h2 class="posting__title title">{{ t('posting_setup') }}</h2>
             <div class="posting__wrapper">
                 <PostingMain />
                 <PostingOnGroups />

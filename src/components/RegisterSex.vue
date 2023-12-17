@@ -2,6 +2,8 @@
 import InputSwitch from 'primevue/inputswitch'
 import RadioButton from 'primevue/radiobutton'
 import { useRegisterStore } from '@/stores/register'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const registerStore = useRegisterStore()
 </script>
@@ -9,11 +11,11 @@ const registerStore = useRegisterStore()
 <template>
     <div class="register">
         <div class="register__inner">
-            <h3 class="register__subtitle">Выбор пола</h3>
+            <h3 class="register__subtitle">{{ t('gender_selection') }}</h3>
             <div class="register__wrapper">
                 <div class="register__item register__item_reverse">
                     <InputSwitch v-model="registerStore.fields.gender_choose" />
-                    <span class="register__text">Выбор пола</span>
+                    <span class="register__text">{{ t('gender_selection') }}</span>
                 </div>
                 <div class="register__item" v-if="registerStore.fields.gender_choose === true">
                     <div class="register__radio">
@@ -23,7 +25,7 @@ const registerStore = useRegisterStore()
                             name="sex"
                             value="male"
                         />
-                        <label class="register__text" for="male">Мужской</label>
+                        <label class="register__text" for="male">{{ t('male') }}</label>
                     </div>
                     <div class="register__radio">
                         <RadioButton
@@ -32,7 +34,7 @@ const registerStore = useRegisterStore()
                             name="sex"
                             value="female"
                         />
-                        <label class="register__text" for="female">Женский</label>
+                        <label class="register__text" for="female">{{ t('female') }}</label>
                     </div>
                 </div>
             </div>

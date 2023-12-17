@@ -7,6 +7,8 @@ import axios from 'axios'
 import { ref, reactive, onBeforeMount, watch } from 'vue'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '../types/checkpoint'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 onBeforeMount(async () => {
     try {
@@ -28,7 +30,7 @@ const fields: Fields = reactive({
 })
 
 const selectedCheckpoint = ref<{ name: string; value: string }>({ name: '', value: '' })
-const checkpoint = ref([{ name: 'Запрет рекламной деятельности', value: 'zrd' }])
+const checkpoint = ref([{ name: t(`status_zrd`), value: 'zrd' }])
 
 watch(selectedCheckpoint, () => {
     fields.get_statuses = [selectedCheckpoint.value.value]
@@ -38,40 +40,38 @@ watch(selectedCheckpoint, () => {
 <template>
     <AppLayout>
         <div class="checkpoint">
-            <h2 class="checkpoint__title title">Настройки чекпоинта</h2>
+            <h2 class="checkpoint__title title">{{ t('checkpoint_settings') }}</h2>
         </div>
         <div class="checkpoint__inner">
             <div class="checkpoint__item checkpoint__item_reverse">
                 <InputSwitch v-model="fields.get_phone_to_account_with_invalid_phone" />
-                <span class="checkpoint__text">Получать номер телефона аккаунтам слетевшим на телефон</span>
+                <span class="checkpoint__text">{{ t('receive_accounts_phone') }}</span>
             </div>
             <div class="checkpoint__item checkpoint__item_reverse">
                 <InputSwitch
                     v-model="fields.should_be_friends_on_account"
                     v-if="fields.get_phone_to_account_with_invalid_phone === true"
                 />
-                <span class="checkpoint__text">Должны ли быть друзья на аккаунте</span>
+                <span class="checkpoint__text">{{ t('account_friends') }}</span>
             </div>
             <div class="checkpoint__item checkpoint__item_reverse">
                 <InputSwitch v-model="fields.unban_accounts_blocked_status" />
-                <span class="checkpoint__text"
-                    >Получать номер телефона аккаунтам в статусе: "Заблокирован рекламный кабинет навсегда"</span
-                >
+                <span class="checkpoint__text">{{ t('unban_accounts_blocked_status') }}</span>
             </div>
             <div class="checkpoint__item" v-if="fields.get_phone_to_account_with_invalid_phone === true">
-                <span class="checkpoint__text">Дней с момента регистрации</span>
+                <span class="checkpoint__text">{{ t('days_since_reg') }}</span>
                 <Slider v-model="fields.days_after_reg_to_get_phone" :min="0" :max="100" />
             </div>
             <div class="checkpoint__item checkpoint__item_reverse">
                 <InputSwitch v-model="fields.get_all_invalid_statuses" />
-                <span class="checkpoint__text">Брать все невалидные статусы</span>
+                <span class="checkpoint__text">{{ t('get_all_invalid_statuses') }}</span>
             </div>
             <Dropdown
                 v-model="selectedCheckpoint"
                 icon="none"
                 :options="checkpoint"
                 optionLabel="name"
-                placeholder="Брать статусы"
+                :placeholder="t('get_statuses')"
                 unstyled
                 :pt="{
                     root: { class: 'checkpoints__root' },

@@ -7,6 +7,8 @@ import { reactive, onBeforeMount, watch } from 'vue'
 import axios from 'axios'
 import { startWatch, setFields } from '@/helpers'
 import type { Fields } from '@/types/inviter'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const fields: Fields = reactive({
     inviter: '',
@@ -38,30 +40,30 @@ onBeforeMount(async () => {
 <template>
     <AppLayout>
         <div class="inviter">
-            <h2 class="inviter__title title">Настройка инвайтера</h2>
+            <h2 class="inviter__title title">{{ t('inviter_setting') }}</h2>
             <div class="inviter__inner">
                 <div class="inviter__item inviter__item_reverse">
                     <InputSwitch v-model="fields.inviter" />
-                    <span class="inviter__text">Инвайтер</span>
+                    <span class="inviter__text">{{ t('inviter') }}</span>
                 </div>
                 <div class="inviter__item">
-                    <span class="inviter__text">На какой день запускать инвайтер</span>
+                    <span class="inviter__text">{{ t('inviter_launch_day') }}</span>
                     <Slider v-model="fields.day_to_start_inviter" :min="1" :max="10" />
                 </div>
                 <div class="inviter__item inviter__item_reverse">
                     <InputSwitch v-model="fields.check_white_list_names" />
-                    <span class="inviter__text">Проверять White list имен</span>
+                    <span class="inviter__text">{{ t('check_white_list') }}</span>
                 </div>
                 <div class="inviter__item inviter__item_reverse">
                     <InputSwitch v-model="fields.check_black_list_names" />
-                    <span class="inviter__text">Проверять Black list имен</span>
+                    <span class="inviter__text">{{ t('check_black_list') }}</span>
                 </div>
                 <div class="inviter__item">
-                    <span class="inviter__text">Гео</span>
+                    <span class="inviter__text">{{ t('geo') }}</span>
                     <Textarea v-model:input="fields.inviter_geo" />
                 </div>
                 <div class="inviter__item">
-                    <span class="inviter__text">Группы для парсинга целевой аудитории</span>
+                    <span class="inviter__text">{{ t('groups_for_parsing_target_audience') }}</span>
                     <Textarea v-model:input="fields.groups_for_parsing_target_audience" />
                 </div>
             </div>

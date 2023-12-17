@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import InputSwitch from 'primevue/inputswitch'
 import Slider from 'primevue/slider'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
+
 
 import { useRegisterStore } from '@/stores/register'
 
@@ -10,14 +13,14 @@ const registerStore = useRegisterStore()
 <template>
     <div class="register">
         <div class="register__inner">
-            <h3 class="register__subtitle">Друзья</h3>
+            <h3 class="register__subtitle">{{ t('friends') }}</h3>
             <div class="register__wrapper">
                 <div class="register__item register__item_reverse">
                     <InputSwitch v-model="registerStore.fields.add_friends_status" />
-                    <span class="register__item">Добавлять в друзья при регистрации</span>
+                    <span class="register__item">{{ t('friends_when_reg') }}</span>
                 </div>
                 <div class="register__item" v-if="registerStore.fields.add_friends_status === true">
-                    <span class="register__text">Количество друзей</span>
+                    <span class="register__text">{{ t('friends_number') }}</span>
                     <Slider v-model="registerStore.fields.add_friends_count" :min="1" :max="48" :range="true" />
                 </div>
             </div>

@@ -2,6 +2,8 @@
 import InputText from '@/components/ui/InputText.vue'
 import InputSwitch from 'primevue/inputswitch'
 import { useRegisterStore } from '@/stores/register'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const registerStore = useRegisterStore()
 
@@ -20,10 +22,10 @@ const registerStore = useRegisterStore()
                 <div class="register__wrapper">
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.kopeechka_status" />
-                        <span class="register__text">Брать почты с сервиса kopeechka.store</span>
+                        <span class="register__text">{{ t('mail_from_service') }}</span>
                     </div>
                     <div class="register__item" v-if="registerStore.fields.kopeechka_status === true">
-                        <span class="register__text">Api ключ</span>
+                        <span class="register__text">{{ t('key') }}</span>
                         <InputText v-model:input="registerStore.fields.kopeechka_api_key" type="text" />
                     </div>
                     <div
@@ -31,7 +33,7 @@ const registerStore = useRegisterStore()
                         v-if="registerStore.fields.kopeechka_status === true"
                     >
                         <InputSwitch v-model="registerStore.fields.kopeechka_check_valid" />
-                        <span class="register__text">Проверять валидность</span>
+                        <span class="register__text">{{ t('check_valid') }}</span>
                     </div>
                 </div>
             </div>
@@ -40,10 +42,10 @@ const registerStore = useRegisterStore()
                 <div class="register__wrapper">
                     <div class="register__item register__item_reverse">
                         <InputSwitch v-model="registerStore.fields.firstmail_limited_status" />
-                        <span class="register__text">Брать почты с сервиса Firstmail Limited</span>
+                        <span class="register__text">{{ t('mail_from_service') }}</span>
                     </div>
                     <div class="register__item" v-if="registerStore.fields.firstmail_limited_status === true">
-                        <span class="register__text">Api ключ</span>
+                        <span class="register__text">{{ t('key') }}</span>
                         <InputText v-model:input="registerStore.fields.firstmail_limited_api_key" type="text" />
                     </div>
                     <div
@@ -51,7 +53,7 @@ const registerStore = useRegisterStore()
                         v-if="registerStore.fields.firstmail_limited_status === true"
                     >
                         <InputSwitch v-model="registerStore.fields.firstmail_limited_check_valid" />
-                        <span class="register__text">Проверять валидность</span>
+                        <span class="register__text">{{ t('check_valid') }}</span>
                     </div>
                 </div>
             </div>

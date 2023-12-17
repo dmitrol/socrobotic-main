@@ -1,6 +1,6 @@
-// import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import Dashboard from '@/views/Dashboard.vue'
-// import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -194,16 +194,16 @@ const router = createRouter({
 	],
 })
 
-// router.beforeEach((to, from, next) => {
-//	const userStore = useUserStore()
-//	const { user } = storeToRefs(userStore)
-//	const publicView = ['/login']
-//	const authRequired = !publicView.includes(to.path)
-//	if (authRequired && user.value === null) {
-//		next('/login')
-//	} else {
-//		next()
-//	}
-//})
+router.beforeEach((to, from, next) => {
+	const userStore = useUserStore()
+	const { user } = storeToRefs(userStore)
+	const publicView = ['/login']
+	const authRequired = !publicView.includes(to.path)
+	if (authRequired && user.value === null) {
+		next('/login')
+	} else {
+		next()
+	}
+})
 
 export default router

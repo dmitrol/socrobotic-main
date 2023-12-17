@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import InputSwitch from 'primevue/inputswitch'
 import { useAutoserverStore } from '@/stores/autoserver'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({})
 
 const autoserverStore = useAutoserverStore()
 </script>
@@ -8,11 +10,11 @@ const autoserverStore = useAutoserverStore()
 <template>
     <div class="auto">
         <div class="auto__inner">
-            <h3 class="auto__subtitle">Автоматическое управление шаблонами в Zennoposter</h3>
+            <h3 class="auto__subtitle">{{ t('templates_auto_control') }}</h3>
             <div class="auto__wrapper">
                 <div class="auto__item auto__item_reverse">
                     <InputSwitch v-model="autoserverStore.fields.template_registrator" />
-                    <span class="auto__text">Регистратор</span>
+                    <span class="auto__text">{{ t('registrator') }}</span>
                 </div>
                 <div class="auto__item auto__item_reverse">
                     <InputSwitch v-model="autoserverStore.fields.template_worm" />

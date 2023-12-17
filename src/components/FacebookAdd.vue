@@ -34,7 +34,7 @@ const logi = ref('')
 </script>
 
 <template>
-	<Accordion :activeIndex="0">
+	<Accordion :activeIndex="1">
 		<AccordionTab :pt="{ headerAction: { class: 'accordion__headeraction' }, content: { class: 'accordion__content' }, }">
 			<template #header>
 				<div class="facebook__item">
